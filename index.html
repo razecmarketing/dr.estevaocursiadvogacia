@@ -1,0 +1,99 @@
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dr. Estevão Cursi - Advocacia Estratégica</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script type="module" src="app.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <nav>
+    <div class="logo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="logo-svg">
+        <path d="M50 10 L90 50 L50 90 L10 50 Z" fill="#1a1a2e" />
+        <text x="50" y="60" text-anchor="middle" fill="white" font-size="40" class="logo-text-neon">EC</text>
+      </svg>
+      <span class="logo-name">Dr. Estevão Cursi</span>
+    </div>
+    <ul>
+      <li><a href="#home">Início</a></li>
+      <li><a href="#about">Sobre</a></li>
+      <li><a href="#values">Valores</a></li>
+      <li><a href="#contact">Contato</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1 class="animate-on-load">Advocacia Estratégica de Alto Nível</h1>
+        <p class="animate-on-load"><span style="color: red;">Soluções jurídicas</span> <span style="color: yellow;">precisas e personalizadas</span></p>
+        <div class="cta-container">
+          <a href="https://wa.me/5511985773185?text=Olá%20Dr.%20eu%20gostaria%20de%20agendar%20uma%20consulta%20com%20o%20sr." 
+             target="_blank" 
+             class="cta-button">
+            Marque uma Consulta Jurídica
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about-section">
+      <div class="section-content">
+        <h2>Visão, Missão e Valores</h2>
+        <div class="values-grid">
+          <div class="value-card">
+            <div class="card-icon">🔭</div>
+            <h3>Visão</h3>
+            <p>Ser referência em soluções jurídicas inovadoras e estratégicas</p>
+          </div>
+          <div class="value-card">
+            <div class="card-icon">🎯</div>
+            <h3>Missão</h3>
+            <p>Defender os direitos dos nossos clientes com precisão e dedicação</p>
+          </div>
+          <div class="value-card">
+            <div class="card-icon">✨</div>
+            <h3>Valores</h3>
+            <ul>
+              <li>Integridade Absoluta</li>
+              <li>Transparência Total</li>
+              <li>Compromisso Inabalável</li>
+              <li>Excelência Jurídica</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+      <div class="section-content">
+        <h2>Consulta Jurídica Personalizada</h2>
+        <form id="contact-form">
+          <input type="text" name="name" placeholder="Nome Completo" required>
+          <input type="email" name="email" placeholder="E-mail Profissional" required>
+          <textarea name="message" placeholder="Descreva sua necessidade jurídica com detalhes" required></textarea>
+          <button type="submit">Solicitar Consulta</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <div id="whatsapp-button">
+    <a href="https://wa.me/5511985773185?text=Olá%20Dr.%20eu%20gostaria%20de%20agendar%20uma%20consulta%20com%20o%20sr." 
+       target="_blank" 
+       class="whatsapp-btn">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+  </div>
+
+  <footer>
+    <p>Desenvolvido por Razec Marketing e Tecnologia S.A. 2025</p>
+  </footer>
+</body>
+</html>
