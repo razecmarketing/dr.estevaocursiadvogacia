@@ -33,45 +33,153 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   );
 
-  // Contact Form Submission
+  // Navigation behavior (updated to handle different scenarios)
+  const navHome = document.getElementById('nav-home');
+  const navAbout = document.getElementById('nav-about');
+  const navValues = document.getElementById('nav-values');
+  const navContact = document.getElementById('nav-contact');
+  const whatsappLink = 'https://wa.me/5511985773185?text=Olá%20Dr.%20eu%20gostaria%20de%20agendar%20uma%20consulta%20com%20o%20sr.';
+
+  // Ensure elements exist before adding event listeners
+  if (navHome) {
+    navHome.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (window.pageYOffset === 0) {
+        // If already at the top, reload the page
+        window.location.reload();
+      } else {
+        // Scroll to the top
+        gsap.to(window, {
+          duration: 1,
+          scrollTo: { y: 0 },
+          ease: 'power2.inOut'
+        });
+      }
+    });
+  }
+
+  if (navAbout) {
+    navAbout.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.open(whatsappLink, '_blank');
+    });
+  }
+
+  if (navValues) {
+    navValues.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.open(whatsappLink, '_blank');
+    });
+  }
+
+  if (navContact) {
+    navContact.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.open(whatsappLink, '_blank');
+    });
+  }
+
+  // Mobile Navigation Tabs
+  const mobileNavTabs = document.querySelectorAll('.mobile-nav-tab');
+  const mobileSections = document.querySelectorAll('.mobile-section');
+  const whatsappLinkMobile = 'https://wa.me/5511985773185?text=Olá%20Dr.%20eu%20gostaria%20de%20agendar%20uma%20consulta%20com%20o%20sr.';
+
+  mobileNavTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // Remove active state from all tabs and sections
+      mobileNavTabs.forEach(t => t.classList.remove('active'));
+      mobileSections.forEach(s => s.classList.remove('active-section'));
+
+      // Add active state to clicked tab
+      tab.classList.add('active');
+
+      const targetSection = tab.dataset.target;
+
+      switch(targetSection) {
+        case 'home':
+          document.getElementById('home').classList.add('active-section');
+          break;
+        case 'about':
+          document.getElementById('about').classList.add('active-section');
+          break;
+        case 'contact':
+          document.getElementById('contact').classList.add('active-section');
+          break;
+        case 'whatsapp':
+          window.open(whatsappLinkMobile, '_blank');
+          break;
+      }
+    });
+  });
+
+  // Contact Form Submission and Validation
   const contactForm = document.getElementById('contact-form');
+  const nameInput = contactForm.querySelector('input[name="name"]');
+  const emailInput = contactForm.querySelector('input[name="email"]');
+  const messageInput = contactForm.querySelector('textarea[name="message"]');
+
+  // Custom validation functions
+  function validateName(name) {
+    const nameRegex = /^[A-Za-zÀ-ÿ\s]+$/;
+    return nameRegex.test(name);
+  }
+
+  function validateEmail(email) {
+    const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+    return emailRegex.test(email);
+  }
+
+  function validateMessage(message) {
+    return message.trim().length >= 20;
+  }
+
   contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
     
-    // Collect form data
-    const formData = new FormData(contactForm);
-    const name = formData.get('name');
-    const email = formData.get('email');
-    const message = formData.get('message');
+    // Validate inputs
+    const name = nameInput.value.trim();
+    const email = emailInput.value.trim();
+    const message = messageInput.value.trim();
+
+    if (!validateName(name)) {
+      alert('Por favor, insira um nome válido (apenas letras).');
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      alert('Por favor, insira um e-mail válido.');
+      return;
+    }
+
+    if (!validateMessage(message)) {
+      alert('A mensagem deve ter pelo menos 20 caracteres.');
+      return;
+    }
+
+    // Prepare WhatsApp message
+    const whatsappMessage = `Consulta Jurídica\n\nNome: ${name}\nE-mail: ${email}\n\nMensagem: ${message}`;
+    const encodedMessage = encodeURIComponent(whatsappMessage);
+    const whatsappUrl = `https://wa.me/5511985773185?text=${encodedMessage}`;
 
     // GSAP animation for form submission
     gsap.to(contactForm, {
       scale: 0.9,
       duration: 0.2,
       onComplete: () => {
-        // Send email using EmailJS
-        emailjs.send("service_xxxxxxxxxx", "template_yyyyyyyyy", {
-          from_name: name,
-          from_email: email,
-          message: message,
-          to_email: "estevao.cursi@adv.oabsp.org.br"
-        }).then(
-          function(response) {
-            console.log("SUCCESS", response);
-            alert('Mensagem enviada com sucesso! Em breve entraremos em contato.');
-            contactForm.reset();
-          },
-          function(error) {
-            console.log("FAILED", error);
-            alert('Erro ao enviar a mensagem. Por favor, tente novamente.');
-          }
-        );
+        // Open WhatsApp with pre-filled message
+        window.open(whatsappUrl, '_blank');
 
-        // Restore form scale
+        // Reset form and scale
+        contactForm.reset();
         gsap.to(contactForm, { scale: 1, duration: 0.2 });
       }
     });
   });
+
+  // Prevent form resubmission on page reload
+  if (window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+  }
 
   // Smooth Scrolling
   const navLinks = document.querySelectorAll('nav a');

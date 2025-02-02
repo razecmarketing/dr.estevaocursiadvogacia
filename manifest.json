@@ -1,0 +1,21 @@
+{
+  "name": "Dr. Estevão Cursi - Advocacia Estratégica",
+  "short_name": "Dr. Estevão Cursi",
+  "description": "Advocacia Estratégica de Alto Nível",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1a2e",
+  "theme_color": "#1a1a2e",
+  "icons": [
+    {
+      "src": "icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
